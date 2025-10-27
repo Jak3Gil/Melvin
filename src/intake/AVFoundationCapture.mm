@@ -105,9 +105,9 @@
         return NO;
     }
     
-    // Configure session
+    // Configure session - use HIGH quality for full resolution capture
     [self.session beginConfiguration];
-    self.session.sessionPreset = AVCaptureSessionPresetLow; // Low for 16x16
+    self.session.sessionPreset = AVCaptureSessionPresetHigh; // High quality for max resolution
     
     if ([self.session canAddInput:input]) {
         [self.session addInput:input];

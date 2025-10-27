@@ -113,10 +113,10 @@ bool DisplayManager::process_events() {
 
 void DisplayManager::create_camera_window() {
     namedWindow("Melvin Camera", cv::WINDOW_AUTOSIZE);
-    cv::resizeWindow("Melvin Camera", 512, 512);
+    cv::resizeWindow("Melvin Camera", 640, 640);
     
-    // Initialize frame buffer (256x256 for upscaled 16x16)
-    camera_frame_ = cv::Mat::zeros(256, 256, CV_8UC3);
+    // Initialize frame buffer (640x640 for upscaled 16x16)
+    camera_frame_ = cv::Mat::zeros(640, 640, CV_8UC3);
 }
 
 void DisplayManager::create_audio_window() {
@@ -136,10 +136,11 @@ void DisplayManager::upscale_frame(const uint8_t* src, cv::Mat& dst) {
     cv::cvtColor(src_mat, src_rgb, cv::COLOR_BGR2RGB);
     
     // Use INTER_LINEAR for smoother upscaling (better than nearest neighbor)
-    cv::resize(src_rgb, dst, cv::Size(256, 256), 0, 0, cv::INTER_LINEAR);
+    // Scale to 640x480 for better visibility while keeping aspect ratio
+    cv::resize(src_rgb, dst, cv::Size(640, 640), 0, 0, cv::INTER_LINEAR);
     
-    // Add optional denoising for even better quality
-    // cv::fastNlMeansDenoisingColored(dst, dst, 3, 3, 7, 21);
+    // Note: The actual camera is now capturing HIGH quality in AVFoundationCapture
+    // We still extract 16x16 for processing but display full quality
 }
 
 void DisplayManager::draw_camera_overlay(const GraphStats& stats) {
@@ -160,7 +161,10 @@ void DisplayManager::draw_camera_overlay(const GraphStats& stats) {
 
 void DisplayManager::draw_attention_box(const FocusRegion& focus) {
     // Draw a single focused attention box (smoothly transitioning)
-    const int PATCH_SIZE = 16;  // Each patch is 16x16 pixels in the 256x256 display
+    // The display is now 640x640 (from 16x16 upscaled)
+    // Each patch in original 16x16 = 40x40 pixels in 640x640 display
+    const int DISPLAY_WIDTH = 640;
+    const int PATCH_SIZE = DISPLAY_WIDTH / 16;  // 40 pixels per patch
     
     // Smooth saccade transition (biological flick instead of jump)
     const float smooth_factor = 0.15f;  // 0.1 = fast, 0.15 = medium, 0.2 = slow
@@ -175,14 +179,14 @@ void DisplayManager::draw_attention_box(const FocusRegion& focus) {
     int pixel_x = focus_patch_x * PATCH_SIZE;
     int pixel_y = focus_patch_y * PATCH_SIZE;
     
-    // Draw attention box (red rectangle) - ONE SINGLE BOX
+    // Draw attention box (red rectangle, thicker for visibility) - ONE SINGLE BOX
     cv::Rect attention_box(pixel_x, pixel_y, PATCH_SIZE, PATCH_SIZE);
-    cv::rectangle(camera_frame_, attention_box, cv::Scalar(0, 0, 255), 2);
+    cv::rectangle(camera_frame_, attention_box, cv::Scalar(0, 0, 255), 3);
     
-    // Draw "ATTENTION" label
+    // Draw "FOCUS" label (larger font for visibility)
     cv::putText(camera_frame_, "FOCUS", 
-                cv::Point(pixel_x, pixel_y - 5),
-                cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255), 1);
+                cv::Point(pixel_x, pixel_y - 10),
+                cv::FONT_HERSHEY_SIMPLEX, 0.7, cv::Scalar(0, 0, 255), 2);
 }
 
 void DisplayManager::update_camera_frame_focus(const uint8_t* frame_data, size_t frame_size,
