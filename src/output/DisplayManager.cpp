@@ -149,20 +149,6 @@ void DisplayManager::upscale_frame(const uint8_t* src, cv::Mat& dst) {
 }
 
 void DisplayManager::draw_camera_overlay(const GraphStats& stats) {
-    // Draw attention box (red rectangle)
-    cv::Rect attention_box(
-        static_cast<int>(stats.attention_x * 256 / 16),
-        static_cast<int>(stats.attention_y * 256 / 16),
-        16 * 16,  // Attention box is 1x1 in 16x16, scaled to 16x16 in 256x256
-        16 * 16
-    );
-    cv::rectangle(camera_frame_, attention_box, cv::Scalar(0, 0, 255), 2);
-    
-    // Draw "ATTENTION" label
-    cv::putText(camera_frame_, "ATTENTION", 
-                cv::Point(attention_box.x, attention_box.y - 5),
-                cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 255), 1);
-    
     // Draw stats text
     std::stringstream ss;
     ss << "Nodes: " << stats.nodes << "  Edges: " << stats.edges;
@@ -176,6 +162,60 @@ void DisplayManager::draw_camera_overlay(const GraphStats& stats) {
     cv::putText(camera_frame_, ss2.str(),
                 cv::Point(10, 60),
                 cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(255, 255, 255), 1);
+}
+
+void DisplayManager::draw_attention_box(const FocusRegion& focus) {
+    // Draw a single focused attention box (smoothly transitioning)
+    const int PATCH_SIZE = 16;  // Each patch is 16x16 pixels in the 256x256 display
+    
+    // Smooth saccade transition (biological flick instead of jump)
+    const float smooth_factor = 0.15f;  // 0.1 = fast, 0.15 = medium, 0.2 = slow
+    smooth_x_ = smooth_x_ * (1.0f - smooth_factor) + static_cast<float>(focus.patch_x) * smooth_factor;
+    smooth_y_ = smooth_y_ * (1.0f - smooth_factor) + static_cast<float>(focus.patch_y) * smooth_factor;
+    
+    // Clamp to valid range
+    int focus_patch_x = std::max(0, std::min(15, static_cast<int>(smooth_x_)));
+    int focus_patch_y = std::max(0, std::min(15, static_cast<int>(smooth_y_)));
+    
+    // Convert patch coordinates to pixel coordinates
+    int pixel_x = focus_patch_x * PATCH_SIZE;
+    int pixel_y = focus_patch_y * PATCH_SIZE;
+    
+    // Draw attention box (red rectangle) - ONE SINGLE BOX
+    cv::Rect attention_box(pixel_x, pixel_y, PATCH_SIZE, PATCH_SIZE);
+    cv::rectangle(camera_frame_, attention_box, cv::Scalar(0, 0, 255), 2);
+    
+    // Draw "ATTENTION" label
+    cv::putText(camera_frame_, "FOCUS", 
+                cv::Point(pixel_x, pixel_y - 5),
+                cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255), 1);
+}
+
+void DisplayManager::update_camera_frame_focus(const uint8_t* frame_data, size_t frame_size,
+                                               const GraphStats& stats, const FocusRegion& focus) {
+    if (!frame_data || frame_size < 768) return;
+    
+#ifdef HAVE_OPENCV
+    try {
+        std::lock_guard<std::mutex> lock(frame_mutex_);
+        
+        // Upscale 16x16 to 256x256
+        upscale_frame(frame_data, camera_frame_);
+        
+        // Draw overlay if enabled
+        if (show_overlay_) {
+            draw_camera_overlay(stats);
+            draw_attention_box(focus);  // Draw single focus box
+        }
+        
+        // Display the frame
+        imshow("Melvin Camera", camera_frame_);
+    } catch (const cv::Exception& e) {
+        std::cerr << "[Display] Camera update error: " << e.what() << "\n";
+    }
+#else
+    print_ascii_camera(frame_data, stats);
+#endif
 }
 
 void DisplayManager::draw_audio_waveform(const int16_t* audio_data, size_t audio_size) {

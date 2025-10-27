@@ -25,6 +25,13 @@ struct GraphStats {
     float attention_weight = 0.0f;
 };
 
+// Single focus region (one patch being attended to)
+struct FocusRegion {
+    int patch_x = 0;  // Patch index 0-15
+    int patch_y = 0;  // Patch index 0-15
+    float score = 0.0f;
+};
+
 // Display manager for OpenCV visualization windows
 class DisplayManager {
 public:
@@ -41,6 +48,10 @@ public:
     void update_camera_frame(const uint8_t* frame_data, size_t frame_size, 
                             const GraphStats& stats, bool show_attention = true);
     
+    // Update camera frame with single focus region
+    void update_camera_frame_focus(const uint8_t* frame_data, size_t frame_size,
+                                   const GraphStats& stats, const FocusRegion& focus);
+    
     // Update audio waveform
     void update_audio_waveform(const int16_t* audio_data, size_t audio_size);
     
@@ -54,6 +65,10 @@ private:
     std::atomic<bool> active_;
     bool show_overlay_;
     
+    // Smooth saccade transition
+    float smooth_x_ = 0.0f;
+    float smooth_y_ = 0.0f;
+    
 #ifdef HAVE_OPENCV
     cv::Mat camera_frame_;
     cv::Mat audio_frame_;
@@ -62,6 +77,7 @@ private:
     // Camera window helpers
     void create_camera_window();
     void draw_camera_overlay(const GraphStats& stats);
+    void draw_attention_box(const FocusRegion& focus);
     
     // Audio window helpers
     void create_audio_window();

@@ -21,6 +21,9 @@
 #include "output/Visualizer.h"
 #include "output/DisplayManager.h"
 #include "evolution/EvolutionEngine.h"
+
+// Define FocusRegion if not already defined
+using FocusRegion = melvin::FocusRegion;
 #include "pruning/PruningEngine.h"
 #include "feedback/FeedbackRouter.h"
 #include "diagnostic/DebugTracer.h"
@@ -258,16 +261,20 @@ int main() {
                     GraphStats gstats;
                     gstats.nodes = graph->node_count();
                     gstats.edges = graph->edge_count();
-                    auto pos = visual_attention->get_position();
-                    gstats.attention_x = pos.first;
-                    gstats.attention_y = pos.second;
                     gstats.attention_weight = 0.85f; // TODO: get from activation field
                     
-                    display_manager->update_camera_frame(
+                    // Get current focus position
+                    auto pos = visual_attention->get_position();
+                    FocusRegion focus;
+                    focus.patch_x = static_cast<int>(pos.first);   // 0-15
+                    focus.patch_y = static_cast<int>(pos.second);  // 0-15
+                    focus.score = 0.85f;
+                    
+                    display_manager->update_camera_frame_focus(
                         (const uint8_t*)node->payload(), 
                         node->payload_size(),
                         gstats,
-                        true
+                        focus
                     );
                     break;
                 }
