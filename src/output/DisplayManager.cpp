@@ -128,24 +128,18 @@ void DisplayManager::create_audio_window() {
 }
 
 void DisplayManager::upscale_frame(const uint8_t* src, cv::Mat& dst) {
-    // 16x16 RGB input -> 256x256 RGB output (16x upscale)
-    for (int y = 0; y < 256; ++y) {
-        for (int x = 0; x < 256; ++x) {
-            int src_x = x / 16;
-            int src_y = y / 16;
-            
-            int src_idx = (src_y * 16 + src_x) * 3;
-            
-            if (src_idx < 768) {
-                cv::Vec3b pixel;
-                pixel[0] = src[src_idx + 0];     // B
-                pixel[1] = src[src_idx + 1];     // G
-                pixel[2] = src[src_idx + 2];     // R
-                
-                dst.at<cv::Vec3b>(y, x) = pixel;
-            }
-        }
-    }
+    // Create OpenCV Mat from source 16x16x3 data
+    cv::Mat src_mat(16, 16, CV_8UC3, const_cast<uint8_t*>(src));
+    
+    // Convert BGR to RGB (OpenCV uses BGR internally)
+    cv::Mat src_rgb;
+    cv::cvtColor(src_mat, src_rgb, cv::COLOR_BGR2RGB);
+    
+    // Use INTER_LINEAR for smoother upscaling (better than nearest neighbor)
+    cv::resize(src_rgb, dst, cv::Size(256, 256), 0, 0, cv::INTER_LINEAR);
+    
+    // Add optional denoising for even better quality
+    // cv::fastNlMeansDenoisingColored(dst, dst, 3, 3, 7, 21);
 }
 
 void DisplayManager::draw_camera_overlay(const GraphStats& stats) {
