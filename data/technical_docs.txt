@@ -1,0 +1,78 @@
+
+SYSTEM ARCHITECTURE
+
+The graph structure contains nodes representing sensory chunks and edges representing temporal co activation patterns.
+
+Each node contains a payload of fixed size depending on modality with vision using 768 bytes audio using 640 bytes and text using 1 byte.
+
+Connection formation happens when new nodes appear connecting to their temporal neighbors within a specified radius.
+
+Weight updates occur when nodes appear together repeatedly with connection strength increasing based on co occurrence frequency.
+
+Generalization emerges through leap node consolidation where three fully connected nodes merge into a single abstract representation.
+
+Coherence measures the ratio of internal weights between active nodes to external weights connecting to inactive regions of the graph.
+
+Reasoning continues until the activation field reaches stability defined by low variance in energy distribution across nodes.
+
+The output layer routes active nodes to appropriate channels including motor control audio synthesis visual attention and text generation.
+
+Evolution adapts parameters over time based on fitness metrics including prediction accuracy coherence stability and computational efficiency.
+
+Pruning removes low frequency nodes and edges keeping the graph focused on recent and frequently used patterns.
+
+IMPLEMENTATION DETAILS
+
+Memory allocation uses efficient storage for variable sized payloads with ascending node IDs representing temporal order.
+
+Thread safety ensures concurrent access to the graph through shared mutexes and atomic operations for node ID generation.
+
+The feedback loop closes the perception action cycle by routing all outputs back into the intake layer as new sensory data.
+
+Motor control interfaces with hardware via CAN bus protocol sending position velocity and torque commands based on active motor nodes.
+
+Visual attention dynamically shifts a 16 by 16 pixel window across input based on which vision nodes have highest activation.
+
+Audio output processes active audio nodes sending samples to speakers or text to speech systems based on payload content.
+
+Text output concatenates characters from active text nodes creating readable output streams.
+
+
+SYSTEM ARCHITECTURE
+
+The graph structure contains nodes representing sensory chunks and edges representing temporal co activation patterns.
+
+Each node contains a payload of fixed size depending on modality with vision using 768 bytes audio using 640 bytes and text using 1 byte.
+
+Connection formation happens when new nodes appear connecting to their temporal neighbors within a specified radius.
+
+Weight updates occur when nodes appear together repeatedly with connection strength increasing based on co occurrence frequency.
+
+Generalization emerges through leap node consolidation where three fully connected nodes merge into a single abstract representation.
+
+Coherence measures the ratio of internal weights between active nodes to external weights connecting to inactive regions of the graph.
+
+Reasoning continues until the activation field reaches stability defined by low variance in energy distribution across nodes.
+
+The output layer routes active nodes to appropriate channels including motor control audio synthesis visual attention and text generation.
+
+Evolution adapts parameters over time based on fitness metrics including prediction accuracy coherence stability and computational efficiency.
+
+Pruning removes low frequency nodes and edges keeping the graph focused on recent and frequently used patterns.
+
+IMPLEMENTATION DETAILS
+
+Memory allocation uses efficient storage for variable sized payloads with ascending node IDs representing temporal order.
+
+Thread safety ensures concurrent access to the graph through shared mutexes and atomic operations for node ID generation.
+
+The feedback loop closes the perception action cycle by routing all outputs back into the intake layer as new sensory data.
+
+Motor control interfaces with hardware via CAN bus protocol sending position velocity and torque commands based on active motor nodes.
+
+Visual attention dynamically shifts a 16 by 16 pixel window across input based on which vision nodes have highest activation.
+
+Audio output processes active audio nodes sending samples to speakers or text to speech systems based on payload content.
+
+Text output concatenates characters from active text nodes creating readable output streams.
+

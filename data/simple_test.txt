@@ -1,0 +1,4 @@
+This is a test of Melvin's cognitive architecture.
+Melvin processes text by creating graph nodes for each character.
+Connections form when nodes appear together in time.
+Patterns emerge through activation and coherence.

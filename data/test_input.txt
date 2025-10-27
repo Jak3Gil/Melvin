@@ -1,0 +1,12 @@
+First Citizen:
+We ever must confess your friendliness to ourselves; what else?
+
+Second Citizen:
+Nay, speak not of equal friendship.
+
+Third Citizen:
+Nay, speak one truth unto yourselves; what we name justice be shown in even straightness.
+
+This is a test document for Melvin's cognitive architecture. The system processes text by creating nodes for each character and forming connections through temporal co-occurrence. As more text flows through the system, patterns emerge through the activation of connected nodes.
+
+Melvin learns by connecting nodes that appear together in time, building understanding through simple association rather than explicit labels or rules.
