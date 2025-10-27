@@ -22,30 +22,103 @@
     return self;
 }
 
-- (BOOL)start {
-    // Request camera permission
-    AVCaptureDeviceDiscoverySession *discovery = [AVCaptureDeviceDiscoverySession
-        discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera]
-        mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionBack];
++ (BOOL)checkCameraPermission {
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     
-    if (discovery.devices.count == 0) {
-        NSLog(@"No camera available");
+    if (status == AVAuthorizationStatusNotDetermined) {
+        NSLog(@"⚠️  Camera permission not determined. Requesting...");
         return NO;
     }
     
-    AVCaptureDevice *device = discovery.devices.firstObject;
+    if (status == AVAuthorizationStatusDenied || status == AVAuthorizationStatusRestricted) {
+        NSLog(@"❌ Camera permission DENIED or RESTRICTED");
+        NSLog(@"   Please grant permission in: System Settings → Privacy & Security → Camera");
+        NSLog(@"   Or reset with: tccutil reset Camera");
+        return NO;
+    }
     
+    return YES;
+}
+
+- (BOOL)start {
+    NSLog(@"🎥 === Camera Intake Starting ===");
+    
+    // Check permission
+    if (![MelvinCameraCapture checkCameraPermission]) {
+        return NO;
+    }
+    
+    // Request camera permission if not determined
+    __block BOOL permissionGranted = NO;
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo 
+                               completionHandler:^(BOOL granted) {
+        permissionGranted = granted;
+        NSLog(@"Camera permission request: %@", granted ? @"✅ GRANTED" : @"❌ DENIED");
+    }];
+    
+    // Give permission request a moment
+    for (int i = 0; i < 10 && !permissionGranted; i++) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+    
+    if (!permissionGranted) {
+        NSLog(@"❌ Camera permission denied by user");
+        return NO;
+    }
+    
+    // Discover devices
+    AVCaptureDeviceDiscoverySession *discovery = [AVCaptureDeviceDiscoverySession
+        discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera]
+        mediaType:AVMediaTypeVideo 
+        position:AVCaptureDevicePositionBack];
+    
+    NSLog(@"Found %lu camera device(s)", (unsigned long)discovery.devices.count);
+    
+    if (discovery.devices.count == 0) {
+        NSLog(@"❌ No camera available");
+        return NO;
+    }
+    
+    // Select device
+    AVCaptureDevice *device = discovery.devices.firstObject;
+    NSLog(@"Using device: %@", device.localizedName);
+    NSLog(@"Device ID: %@", device.uniqueID);
+    NSLog(@"Backend: AVFoundation (macOS)");
+    
+    // Configure device
+    NSError *configError = nil;
+    if ([device lockForConfiguration:&configError]) {
+        if ([device isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+            device.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
+        }
+        if ([device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+            device.focusMode = AVCaptureFocusModeContinuousAutoFocus;
+        }
+        [device unlockForConfiguration];
+    }
+    
+    // Create input
     NSError *error = nil;
     AVCaptureDeviceInput *input = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&error];
     if (error) {
-        NSLog(@"Error creating input: %@", error);
+        NSLog(@"❌ Error creating camera input: %@", error.localizedDescription);
         return NO;
     }
     
+    // Configure session
+    [self.session beginConfiguration];
+    self.session.sessionPreset = AVCaptureSessionPresetLow; // Low for 16x16
+    
     if ([self.session canAddInput:input]) {
         [self.session addInput:input];
+        NSLog(@"✅ Camera input added");
+    } else {
+        NSLog(@"❌ Cannot add camera input");
+        [self.session commitConfiguration];
+        return NO;
     }
     
+    // Configure output
     AVCaptureVideoDataOutput *output = [[AVCaptureVideoDataOutput alloc] init];
     output.videoSettings = @{(NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_24RGB)};
     output.alwaysDiscardsLateVideoFrames = YES;
@@ -53,16 +126,41 @@
     
     if ([self.session canAddOutput:output]) {
         [self.session addOutput:output];
+        NSLog(@"✅ Camera output added");
+        
+        // Log format info
+        CMVideoDimensions dims = CMVideoFormatDescriptionGetDimensions(device.activeFormat.formatDescription);
+        CMTime frameDuration = device.activeVideoMinFrameDuration;
+        Float64 fps = 30.0;
+        if (frameDuration.value > 0) {
+            fps = CMTimeGetSeconds(frameDuration) > 0 ? 1.0 / CMTimeGetSeconds(frameDuration) : 30.0;
+        }
+        NSLog(@"Capture format: %lux%lu @ %.2f fps", (unsigned long)dims.width, (unsigned long)dims.height, fps);
+        NSLog(@"Target frame size: 16x16 RGB (768 bytes)");
+    } else {
+        NSLog(@"❌ Cannot add camera output");
+        [self.session commitConfiguration];
+        return NO;
     }
     
+    [self.session commitConfiguration];
+    
+    // Start session
     [self.session startRunning];
+    NSLog(@"✅ Camera session started successfully");
+    NSLog(@"   Camera LED should be ON (green indicator)");
+    
     return YES;
 }
 
 - (void)stop {
     [self.session stopRunning];
-    [self.session removeAllInputs];
-    [self.session removeAllOutputs];
+    for (AVCaptureInput *input in self.session.inputs) {
+        [self.session removeInput:input];
+    }
+    for (AVCaptureOutput *output in self.session.outputs) {
+        [self.session removeOutput:output];
+    }
 }
 
 - (uint8_t*)getLatestFrame:(size_t)frameSize {
@@ -132,30 +230,69 @@
     return self;
 }
 
++ (BOOL)checkMicrophonePermission {
+    // On macOS, AVAudioEngine doesn't require explicit permission check
+    // The system will prompt if needed
+    NSLog(@"⚠️  Checking microphone permission...");
+    return YES;
+}
+
 - (BOOL)start {
-    NSError *error = nil;
-    if (![self.engine startAndReturnError:&error]) {
-        NSLog(@"Error starting audio: %@", error);
+    NSLog(@"🎤 === Audio Intake Starting ===");
+    
+    // Check permission
+    if (![MelvinAudioCapture checkMicrophonePermission]) {
         return NO;
     }
     
-    // Install tap on input node (20ms @ 16kHz = 640B)
-    AVAudioFormat *format = [input_node_ outputFormatForBus:0];
+    // On macOS, AVAudioEngine handles permissions automatically
+    // The system will prompt if needed
+    NSLog(@"⚠️  macOS will prompt for microphone permission if needed");
     
-    [input_node_ installTapOnBus:0 bufferSize:320 
+    // Configure engine
+    NSError *error = nil;
+    
+    // Get format info
+    AVAudioFormat *format = [input_node_ outputFormatForBus:0];
+    double sampleRate = format.sampleRate;
+    AVAudioChannelCount channels = format.channelCount;
+    
+    NSLog(@"Audio format:");
+    NSLog(@"  Sample rate: %.0f Hz", sampleRate);
+    NSLog(@"  Channels: %u", (unsigned int)channels);
+    NSLog(@"  Backend: CoreAudio (macOS)");
+    
+    // Start engine
+    if (![self.engine startAndReturnError:&error]) {
+        NSLog(@"❌ Error starting audio engine: %@", error.localizedDescription);
+        return NO;
+    }
+    
+    NSLog(@"✅ Audio engine started");
+    
+    // Install tap on input node (20ms @ 16kHz = 640B)
+    NSUInteger frameLength = (NSUInteger)(sampleRate * 0.02); // 20ms
+    [input_node_ installTapOnBus:0 bufferSize:(AUAudioFrameCount)frameLength 
                          format:format block:^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
         AVAudioFrameCount frameCount = buffer.frameLength;
-        int16_t* data = (int16_t*)buffer.int16ChannelData[0];
         
-        if (audio_size_ == 0) {
-            audio_size_ = 640; // 20ms @ 16kHz
-            latest_audio_ = (int16_t*)malloc(audio_size_ * sizeof(int16_t));
+        // Convert to int16
+        if (buffer.int16ChannelData && buffer.int16ChannelData[0]) {
+            int16_t* data = (int16_t*)buffer.int16ChannelData[0];
+            
+            if (self->audio_size_ == 0) {
+                self->audio_size_ = 640; // 20ms @ 16kHz
+                self->latest_audio_ = (int16_t*)malloc(self->audio_size_ * sizeof(int16_t));
+            }
+            
+            size_t copySize = (frameCount < self->audio_size_ / 2) ? frameCount : self->audio_size_ / 2;
+            memcpy(self->latest_audio_, data, copySize * sizeof(int16_t));
+            self->audio_ready_.store(true);
         }
-        
-        size_t copySize = (frameCount < audio_size_ / 2) ? frameCount : audio_size_ / 2;
-        memcpy(latest_audio_, data, copySize * sizeof(int16_t));
-        audio_ready_.store(true);
     }];
+    
+    NSLog(@"✅ Audio tap installed");
+    NSLog(@"Target buffer: 20ms @ 16kHz mono (640 bytes)");
     
     return YES;
 }

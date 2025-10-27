@@ -6,6 +6,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface MelvinCameraCapture : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate>
++ (BOOL)checkCameraPermission;
 - (BOOL)start;
 - (void)stop;
 - (uint8_t*)getLatestFrame:(size_t)frameSize;
@@ -13,6 +14,7 @@
 @end
 
 @interface MelvinAudioCapture : NSObject <AVCaptureAudioDataOutputSampleBufferDelegate>
++ (BOOL)checkMicrophonePermission;
 - (BOOL)start;
 - (void)stop;
 - (int16_t*)getLatestAudio:(size_t)audioSize;

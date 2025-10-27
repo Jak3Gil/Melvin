@@ -20,6 +20,7 @@ Melvin is a unified cognitive architecture where all sensory data flows through 
 - CMake 3.15 or later
 - pthread library
 - (Optional) SocketCAN for Linux CAN bus support
+- **macOS**: AVFoundation, CoreAudio frameworks (included in macOS SDK)
 
 ### Build Instructions
 
@@ -30,6 +31,38 @@ cmake ..
 make
 ./melvin
 ```
+
+### macOS Setup
+
+**Permissions Required:**
+- Camera access (for vision intake)
+- Microphone access (for audio intake)
+
+**Grant Permissions:**
+1. Open **System Settings → Privacy & Security**
+2. Click **Camera** → Enable for Terminal/Cursor/VS Code
+3. Click **Microphone** → Enable for Terminal/Cursor/VS Code
+
+**Verify Permissions:**
+When you run `./melvin`, you should see:
+- ✅ Camera LED turns ON (green indicator)
+- Console logs showing "Camera Intake Starting" and "Audio Intake Starting"
+
+**Reset Permissions (if needed):**
+```bash
+# Reset camera permissions
+tccutil reset Camera
+
+# Reset microphone permissions
+tccutil reset Microphone
+```
+
+**Troubleshooting:**
+If camera/microphone don't activate:
+1. Check System Settings → Privacy & Security → Camera/Microphone
+2. Ensure your terminal app is authorized
+3. Run `tccutil reset Camera` and `tccutil reset Microphone` to reset
+4. Reboot if needed
 
 ## Directory Structure
 
