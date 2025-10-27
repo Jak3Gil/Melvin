@@ -222,6 +222,9 @@ Melvin_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Melvin_SOURCE_DIR:STATIC=/Users/jakegilbert/Desktop/MELVIN/Melvin
 
+//The directory containing a CMake configuration file for OpenCV.
+OpenCV_DIR:PATH=/opt/homebrew/lib/cmake/opencv4
+
 
 ########################
 # INTERNAL cache entries

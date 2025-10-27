@@ -849,6 +849,30 @@ src/output/AudioOutput.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/melvin.dir/build.make CMakeFiles/melvin.dir/src/output/AudioOutput.cpp.s
 .PHONY : src/output/AudioOutput.cpp.s
 
+src/output/DisplayManager.o: src/output/DisplayManager.cpp.o
+.PHONY : src/output/DisplayManager.o
+
+# target to build an object file
+src/output/DisplayManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/melvin.dir/build.make CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o
+.PHONY : src/output/DisplayManager.cpp.o
+
+src/output/DisplayManager.i: src/output/DisplayManager.cpp.i
+.PHONY : src/output/DisplayManager.i
+
+# target to preprocess a source file
+src/output/DisplayManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/melvin.dir/build.make CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.i
+.PHONY : src/output/DisplayManager.cpp.i
+
+src/output/DisplayManager.s: src/output/DisplayManager.cpp.s
+.PHONY : src/output/DisplayManager.s
+
+# target to generate assembly for a file
+src/output/DisplayManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/melvin.dir/build.make CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.s
+.PHONY : src/output/DisplayManager.cpp.s
+
 src/output/MotorOutput.o: src/output/MotorOutput.cpp.o
 .PHONY : src/output/MotorOutput.o
 
@@ -1188,6 +1212,9 @@ help:
 	@echo "... src/output/AudioOutput.o"
 	@echo "... src/output/AudioOutput.i"
 	@echo "... src/output/AudioOutput.s"
+	@echo "... src/output/DisplayManager.o"
+	@echo "... src/output/DisplayManager.i"
+	@echo "... src/output/DisplayManager.s"
 	@echo "... src/output/MotorOutput.o"
 	@echo "... src/output/MotorOutput.i"
 	@echo "... src/output/MotorOutput.s"

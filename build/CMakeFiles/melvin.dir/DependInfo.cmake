@@ -38,6 +38,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/jakegilbert/Desktop/MELVIN/Melvin/src/motor/MotorController.cpp" "CMakeFiles/melvin.dir/src/motor/MotorController.cpp.o" "gcc" "CMakeFiles/melvin.dir/src/motor/MotorController.cpp.o.d"
   "/Users/jakegilbert/Desktop/MELVIN/Melvin/src/motor/MotorNode.cpp" "CMakeFiles/melvin.dir/src/motor/MotorNode.cpp.o" "gcc" "CMakeFiles/melvin.dir/src/motor/MotorNode.cpp.o.d"
   "/Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/AudioOutput.cpp" "CMakeFiles/melvin.dir/src/output/AudioOutput.cpp.o" "gcc" "CMakeFiles/melvin.dir/src/output/AudioOutput.cpp.o.d"
+  "/Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/DisplayManager.cpp" "CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o" "gcc" "CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o.d"
   "/Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/MotorOutput.cpp" "CMakeFiles/melvin.dir/src/output/MotorOutput.cpp.o" "gcc" "CMakeFiles/melvin.dir/src/output/MotorOutput.cpp.o.d"
   "/Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/OutputManager.cpp" "CMakeFiles/melvin.dir/src/output/OutputManager.cpp.o" "gcc" "CMakeFiles/melvin.dir/src/output/OutputManager.cpp.o.d"
   "/Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/TextOutput.cpp" "CMakeFiles/melvin.dir/src/output/TextOutput.cpp.o" "gcc" "CMakeFiles/melvin.dir/src/output/TextOutput.cpp.o.d"

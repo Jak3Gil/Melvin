@@ -534,10 +534,24 @@ CMakeFiles/melvin.dir/src/output/Visualizer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/melvin.dir/src/output/Visualizer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/Visualizer.cpp -o CMakeFiles/melvin.dir/src/output/Visualizer.cpp.s
 
+CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o: CMakeFiles/melvin.dir/flags.make
+CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o: /Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/DisplayManager.cpp
+CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o: CMakeFiles/melvin.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o -MF CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o.d -o CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o -c /Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/DisplayManager.cpp
+
+CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/DisplayManager.cpp > CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.i
+
+CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jakegilbert/Desktop/MELVIN/Melvin/src/output/DisplayManager.cpp -o CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.s
+
 CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o: CMakeFiles/melvin.dir/flags.make
 CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o: /Users/jakegilbert/Desktop/MELVIN/Melvin/src/evolution/FitnessEvaluator.cpp
 CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o: CMakeFiles/melvin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o -MF CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o.d -o CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o -c /Users/jakegilbert/Desktop/MELVIN/Melvin/src/evolution/FitnessEvaluator.cpp
 
 CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.i: cmake_force
@@ -551,7 +565,7 @@ CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.s: cmake_force
 CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o: CMakeFiles/melvin.dir/flags.make
 CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o: /Users/jakegilbert/Desktop/MELVIN/Melvin/src/evolution/ParameterMutator.cpp
 CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o: CMakeFiles/melvin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o -MF CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o.d -o CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o -c /Users/jakegilbert/Desktop/MELVIN/Melvin/src/evolution/ParameterMutator.cpp
 
 CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.i: cmake_force
@@ -565,7 +579,7 @@ CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.s: cmake_force
 CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o: CMakeFiles/melvin.dir/flags.make
 CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o: /Users/jakegilbert/Desktop/MELVIN/Melvin/src/evolution/EvolutionEngine.cpp
 CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o: CMakeFiles/melvin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o -MF CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o.d -o CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o -c /Users/jakegilbert/Desktop/MELVIN/Melvin/src/evolution/EvolutionEngine.cpp
 
 CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.i: cmake_force
@@ -579,7 +593,7 @@ CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.s: cmake_force
 CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.o: CMakeFiles/melvin.dir/flags.make
 CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.o: /Users/jakegilbert/Desktop/MELVIN/Melvin/src/pruning/PruningEngine.cpp
 CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.o: CMakeFiles/melvin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.o -MF CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.o.d -o CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.o -c /Users/jakegilbert/Desktop/MELVIN/Melvin/src/pruning/PruningEngine.cpp
 
 CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.i: cmake_force
@@ -593,7 +607,7 @@ CMakeFiles/melvin.dir/src/pruning/PruningEngine.cpp.s: cmake_force
 CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o: CMakeFiles/melvin.dir/flags.make
 CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o: /Users/jakegilbert/Desktop/MELVIN/Melvin/src/feedback/FeedbackRouter.cpp
 CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o: CMakeFiles/melvin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o -MF CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o.d -o CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o -c /Users/jakegilbert/Desktop/MELVIN/Melvin/src/feedback/FeedbackRouter.cpp
 
 CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.i: cmake_force
@@ -607,7 +621,7 @@ CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.s: cmake_force
 CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o: CMakeFiles/melvin.dir/flags.make
 CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o: /Users/jakegilbert/Desktop/MELVIN/Melvin/src/diagnostic/DebugTracer.cpp
 CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o: CMakeFiles/melvin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o -MF CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o.d -o CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o -c /Users/jakegilbert/Desktop/MELVIN/Melvin/src/diagnostic/DebugTracer.cpp
 
 CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.i: cmake_force
@@ -621,7 +635,7 @@ CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.s: cmake_force
 CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o: CMakeFiles/melvin.dir/flags.make
 CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o: /Users/jakegilbert/Desktop/MELVIN/Melvin/src/intake/AVFoundationCapture.mm
 CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o: CMakeFiles/melvin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -x objective-c++ -MD -MT CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o -MF CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o.d -o CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o -c /Users/jakegilbert/Desktop/MELVIN/Melvin/src/intake/AVFoundationCapture.mm
 
 CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.i: cmake_force
@@ -667,6 +681,7 @@ melvin_OBJECTS = \
 "CMakeFiles/melvin.dir/src/output/MotorOutput.cpp.o" \
 "CMakeFiles/melvin.dir/src/output/TextOutput.cpp.o" \
 "CMakeFiles/melvin.dir/src/output/Visualizer.cpp.o" \
+"CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o" \
 "CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o" \
 "CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o" \
 "CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o" \
@@ -711,6 +726,7 @@ melvin: CMakeFiles/melvin.dir/src/output/VisualAttention.cpp.o
 melvin: CMakeFiles/melvin.dir/src/output/MotorOutput.cpp.o
 melvin: CMakeFiles/melvin.dir/src/output/TextOutput.cpp.o
 melvin: CMakeFiles/melvin.dir/src/output/Visualizer.cpp.o
+melvin: CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o
 melvin: CMakeFiles/melvin.dir/src/evolution/FitnessEvaluator.cpp.o
 melvin: CMakeFiles/melvin.dir/src/evolution/ParameterMutator.cpp.o
 melvin: CMakeFiles/melvin.dir/src/evolution/EvolutionEngine.cpp.o
@@ -719,8 +735,64 @@ melvin: CMakeFiles/melvin.dir/src/feedback/FeedbackRouter.cpp.o
 melvin: CMakeFiles/melvin.dir/src/diagnostic/DebugTracer.cpp.o
 melvin: CMakeFiles/melvin.dir/src/intake/AVFoundationCapture.mm.o
 melvin: CMakeFiles/melvin.dir/build.make
+melvin: /opt/homebrew/lib/libopencv_gapi.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_stitching.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_alphamat.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_aruco.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_bgsegm.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_bioinspired.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_ccalib.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_dnn_objdetect.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_dnn_superres.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_dpm.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_face.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_freetype.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_fuzzy.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_hfs.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_img_hash.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_intensity_transform.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_line_descriptor.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_mcc.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_quality.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_rapid.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_reg.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_rgbd.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_saliency.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_sfm.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_signal.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_stereo.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_structured_light.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_superres.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_surface_matching.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_tracking.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_videostab.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_viz.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_wechat_qrcode.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_xfeatures2d.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_xobjdetect.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_xphoto.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_shape.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_highgui.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_datasets.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_plot.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_text.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_ml.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_phase_unwrapping.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_optflow.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_ximgproc.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_video.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_videoio.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_imgcodecs.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_objdetect.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_calib3d.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_dnn.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_features2d.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_flann.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_photo.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_imgproc.4.12.0.dylib
+melvin: /opt/homebrew/lib/libopencv_core.4.12.0.dylib
 melvin: CMakeFiles/melvin.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Linking CXX executable melvin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Linking CXX executable melvin"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/melvin.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

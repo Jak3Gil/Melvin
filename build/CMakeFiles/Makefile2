@@ -85,12 +85,12 @@ clean: CMakeFiles/melvin.dir/clean
 CMakeFiles/melvin.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/melvin.dir/build.make CMakeFiles/melvin.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/melvin.dir/build.make CMakeFiles/melvin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41 "Built target melvin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42 "Built target melvin"
 .PHONY : CMakeFiles/melvin.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/melvin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles 41
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles 42
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/melvin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles 0
 .PHONY : CMakeFiles/melvin.dir/rule
@@ -102,7 +102,7 @@ melvin: CMakeFiles/melvin.dir/rule
 # codegen rule for target.
 CMakeFiles/melvin.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/melvin.dir/build.make CMakeFiles/melvin.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41 "Finished codegen for target melvin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jakegilbert/Desktop/MELVIN/Melvin/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42 "Finished codegen for target melvin"
 .PHONY : CMakeFiles/melvin.dir/codegen
 
 # clean rule for target.

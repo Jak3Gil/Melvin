@@ -59,6 +59,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/melvin.dir/src/motor/MotorNode.cpp.o.d"
   "CMakeFiles/melvin.dir/src/output/AudioOutput.cpp.o"
   "CMakeFiles/melvin.dir/src/output/AudioOutput.cpp.o.d"
+  "CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o"
+  "CMakeFiles/melvin.dir/src/output/DisplayManager.cpp.o.d"
   "CMakeFiles/melvin.dir/src/output/MotorOutput.cpp.o"
   "CMakeFiles/melvin.dir/src/output/MotorOutput.cpp.o.d"
   "CMakeFiles/melvin.dir/src/output/OutputManager.cpp.o"

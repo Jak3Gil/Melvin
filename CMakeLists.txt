@@ -8,6 +8,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Include directories
 include_directories(include)
 
+# Find OpenCV for visualization
+find_package(OpenCV QUIET)
+if(OpenCV_FOUND)
+    message(STATUS "Found OpenCV version: ${OpenCV_VERSION}")
+    message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
+    add_definitions(-DHAVE_OPENCV)
+else()
+    message(WARNING "OpenCV not found. Building without GUI visualization support.")
+    message(WARNING "Install with: brew install opencv (macOS) or apt-get install libopencv-dev (Linux)")
+endif()
+
 # Source files
 set(CORE_SOURCES
     src/core/AtomicGraph.cpp
@@ -60,6 +71,7 @@ set(OUTPUT_SOURCES
     src/output/MotorOutput.cpp
     src/output/TextOutput.cpp
     src/output/Visualizer.cpp
+    src/output/DisplayManager.cpp
 )
 
 set(EVOLUTION_SOURCES
@@ -113,9 +125,21 @@ if(APPLE)
         "-framework Foundation"
         "-framework AppKit"
     )
+    
+    # Link OpenCV if available
+    if(OpenCV_FOUND)
+        target_link_libraries(melvin PRIVATE ${OpenCV_LIBS})
+        target_include_directories(melvin PRIVATE ${OpenCV_INCLUDE_DIRS})
+    endif()
 else()
     add_executable(melvin ${SOURCES})
     target_link_libraries(melvin PRIVATE pthread)
+    
+    # Link OpenCV if available
+    if(OpenCV_FOUND)
+        target_link_libraries(melvin PRIVATE ${OpenCV_LIBS})
+        target_include_directories(melvin PRIVATE ${OpenCV_INCLUDE_DIRS})
+    endif()
 endif()
 
 # On Linux, link socketcan for CAN bus

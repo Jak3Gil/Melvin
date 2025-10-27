@@ -19,6 +19,7 @@
 #include "output/MotorOutput.h"
 #include "output/TextOutput.h"
 #include "output/Visualizer.h"
+#include "output/DisplayManager.h"
 #include "evolution/EvolutionEngine.h"
 #include "pruning/PruningEngine.h"
 #include "feedback/FeedbackRouter.h"
@@ -26,6 +27,9 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#ifdef HAVE_OPENCV
+#include <opencv2/opencv.hpp>
+#endif
 
 using namespace melvin;
 
@@ -96,6 +100,18 @@ int main() {
     
     // Initialize visualizer for camera/audio display
     auto visualizer = std::make_unique<Visualizer>();
+    
+    // Initialize display manager (OpenCV windows)
+    auto display_manager = std::make_unique<DisplayManager>();
+    bool use_opencv = display_manager->init();
+    
+#ifdef HAVE_OPENCV
+    if (use_opencv) {
+        std::cout << "[Display] Using OpenCV visualization windows\n";
+    } else {
+        std::cout << "[Display] Falling back to ASCII visualization\n";
+    }
+#endif
     
     std::cout << "Initialization complete.\n";
     
@@ -221,7 +237,57 @@ int main() {
         // 5. OUTPUT: Route to appropriate channels
         output_manager->route_outputs(active_nodes);
         
-        // Visualize camera and audio every 50 cycles
+        // Check if user pressed ESC in display window
+#ifdef HAVE_OPENCV
+        if (use_opencv && !display_manager->process_events()) {
+            std::cout << "\nDisplay window closed by user. Exiting...\n";
+            break;
+        }
+#endif
+        
+        // Display current camera and audio frames
+#ifdef HAVE_OPENCV
+        if (use_opencv) {
+            // Update display windows every cycle
+            std::vector<NodeID> all_nodes = graph->get_all_nodes();
+            
+            // Find recent vision node
+            for (int i = std::min(50, (int)all_nodes.size() - 1); i >= 0; --i) {
+                Node* node = graph->get_node(all_nodes[i]);
+                if (node && node->payload_size() == VISION_PAYLOAD_SIZE) {
+                    GraphStats gstats;
+                    gstats.nodes = graph->node_count();
+                    gstats.edges = graph->edge_count();
+                    auto pos = visual_attention->get_position();
+                    gstats.attention_x = pos.first;
+                    gstats.attention_y = pos.second;
+                    gstats.attention_weight = 0.85f; // TODO: get from activation field
+                    
+                    display_manager->update_camera_frame(
+                        (const uint8_t*)node->payload(), 
+                        node->payload_size(),
+                        gstats,
+                        true
+                    );
+                    break;
+                }
+            }
+            
+            // Find recent audio node
+            for (int i = std::min(50, (int)all_nodes.size() - 1); i >= 0; --i) {
+                Node* node = graph->get_node(all_nodes[i]);
+                if (node && node->payload_size() == AUDIO_PAYLOAD_SIZE) {
+                    display_manager->update_audio_waveform(
+                        (const int16_t*)node->payload(), 
+                        node->payload_size() / 2
+                    );
+                    break;
+                }
+            }
+        }
+#endif
+        
+        // ASCII visualization (every 50 cycles) as fallback
         if (cycle % 50 == 0 && cycle > 0) {
             std::vector<NodeID> all_nodes = graph->get_all_nodes();
             
@@ -300,6 +366,12 @@ int main() {
     
     // Stop hardware capture
     // multimodal_intake->stop();  // DISABLED
+    
+#ifdef HAVE_OPENCV
+    if (use_opencv) {
+        display_manager->shutdown();
+    }
+#endif
     
     // Print final statistics
     std::cout << "\n";
